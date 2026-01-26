@@ -1,0 +1,96 @@
+// keybindings.json - VSCode Keybindings Configuration File of Michael-Matta1 @ https://github.com/Michael-Matta1/dev-dotfiles
+
+[
+    // zsh-edit-select configuration for VSCode Terminal
+    // Ctrl+Left arrow sends Ctrl+Left to terminal (for word selection in zsh)
+    {
+        "key": "ctrl+left",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;5D" },
+        "when": "terminalFocus"
+    },
+    // Ctrl+Right arrow sends Ctrl+Right to terminal (for word selection in zsh)
+    {
+        "key": "ctrl+right",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;5C" },
+        "when": "terminalFocus"
+    },
+    // Ctrl+Home sends Ctrl+Home to terminal
+    {
+        "key": "ctrl+home",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;5H" },
+        "when": "terminalFocus"
+    },
+    // Ctrl+End sends Ctrl+End to terminal
+    {
+        "key": "ctrl+end",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;5F" },
+        "when": "terminalFocus"
+    },
+    // Ctrl+C sends \x1b[67;6u to terminal (like Kitty's \x1b[67;6u)
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[67;6u" },
+        "when": "terminalFocus"
+    },
+    // Ctrl+Shift+C sends interrupt signal (like Kitty's \x03)
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u0003" },
+        "when": "terminalFocus"
+    },
+
+    {
+        "key": "ctrl+shift+left",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;6D" },
+        "when": "terminalFocus"
+    },
+    // Send Ctrl+Shift+Right arrow to terminal (for word selection in zsh)
+    {
+        "key": "ctrl+shift+right",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;6C" },
+        "when": "terminalFocus"
+    },
+    // Send Ctrl+Shift+Home to terminal
+    {
+        "key": "ctrl+shift+home",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;6H" },
+        "when": "terminalFocus"
+    },
+    // Send Ctrl+Shift+End to terminal
+    {
+        "key": "ctrl+shift+end",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[1;6F" },
+        "when": "terminalFocus"
+    },
+
+
+
+    // Browser-like tab navigation
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditor"
+    },
+    // Disable default MRU behavior
+    {
+        "key": "ctrl+tab",
+        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+    }
+]
