@@ -220,7 +220,7 @@ bindkey "^[\[13;2u" autosuggest-execute  # Accept AND Execute with Shift+Enter (
 bindkey '^[[Z' reverse-menu-complete
 
 # -- Quick Directory Jumping --
-bindkey -s '^[z' 'zi\n'        # Alt+Z for interactive zoxide
+bindkey -s '^[d' 'zi\n'        # Alt+D for interactive zoxide
 
 # -- Clear Screen and Scrollback --
 bindkey '^L' clear-screen      # Ctrl+L clears screen (default, but explicit)
@@ -381,6 +381,9 @@ alias epoch2date='_epoch2date() { date -d @"$1" "+%Y-%m-%d %H:%M:%S"; }; _epoch2
 # Download (uncomment if using aria2c)
 # alias wget='aria2c'
 # alias curl='aria2c'
+
+# -- Flatpak applications --
+alias normcap='flatpak run com.github.dynobo.normcap'
 
 # ============================================================================
 # 14. CUSTOM FUNCTIONS

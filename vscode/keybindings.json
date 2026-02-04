@@ -1,96 +1,82 @@
 // keybindings.json - VSCode Keybindings Configuration File of Michael-Matta1 @ https://github.com/Michael-Matta1/dev-dotfiles
 
-[
-    // zsh-edit-select configuration for VSCode Terminal
-    // Ctrl+Left arrow sends Ctrl+Left to terminal (for word selection in zsh)
-    {
-        "key": "ctrl+left",
-        "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;5D" },
-        "when": "terminalFocus"
-    },
-    // Ctrl+Right arrow sends Ctrl+Right to terminal (for word selection in zsh)
-    {
-        "key": "ctrl+right",
-        "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;5C" },
-        "when": "terminalFocus"
-    },
-    // Ctrl+Home sends Ctrl+Home to terminal
-    {
-        "key": "ctrl+home",
-        "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;5H" },
-        "when": "terminalFocus"
-    },
-    // Ctrl+End sends Ctrl+End to terminal
-    {
-        "key": "ctrl+end",
-        "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;5F" },
-        "when": "terminalFocus"
-    },
+// zsh-edit-select configuration for VSCode Terminal
+
     // Ctrl+C sends \x1b[67;6u to terminal (like Kitty's \x1b[67;6u)
     {
         "key": "ctrl+c",
         "command": "workbench.action.terminal.sendSequence",
         "args": { "text": "\u001b[67;6u" },
-        "when": "terminalFocus"
+        "when": "terminalFocus",
     },
     // Ctrl+Shift+C sends interrupt signal (like Kitty's \x03)
     {
         "key": "ctrl+shift+c",
         "command": "workbench.action.terminal.sendSequence",
         "args": { "text": "\u0003" },
-        "when": "terminalFocus"
+        "when": "terminalFocus",
     },
-
+    // Send Ctrl+Shift+Left arrow to terminal (for word selection in zsh)
     {
         "key": "ctrl+shift+left",
         "command": "workbench.action.terminal.sendSequence",
         "args": { "text": "\u001b[1;6D" },
-        "when": "terminalFocus"
+        "when": "terminalFocus",
     },
     // Send Ctrl+Shift+Right arrow to terminal (for word selection in zsh)
     {
         "key": "ctrl+shift+right",
         "command": "workbench.action.terminal.sendSequence",
         "args": { "text": "\u001b[1;6C" },
-        "when": "terminalFocus"
+        "when": "terminalFocus",
     },
-    // Send Ctrl+Shift+Home to terminal
+    // Send Shift+Home to terminal (for select to line start in zsh)
     {
-        "key": "ctrl+shift+home",
+        "key": "shift+home",
         "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;6H" },
-        "when": "terminalFocus"
+        "args": { "text": "\u001b[1;2H" },
+        "when": "terminalFocus",
     },
-    // Send Ctrl+Shift+End to terminal
+    // Send Shift+End to terminal (for select to line end in zsh)
     {
-        "key": "ctrl+shift+end",
+        "key": "shift+end",
         "command": "workbench.action.terminal.sendSequence",
-        "args": { "text": "\u001b[1;6F" },
-        "when": "terminalFocus"
+        "args": { "text": "\u001b[1;2F" },
+        "when": "terminalFocus",
+    },
+    // Ctrl+Z sends undo to terminal (override VS Code's default undo)
+    {
+        "key": "ctrl+z",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001a" },
+        "when": "terminalFocus",
+    },
+    // Ctrl+Shift+Z sends redo to terminal
+    {
+        "key": "ctrl+shift+z",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u001b[90;6u" },
+        "when": "terminalFocus",
     },
 
 
 
-    // Browser-like tab navigation
+
+// Browser-like tab navigation
     {
         "key": "ctrl+tab",
-        "command": "workbench.action.nextEditor"
+        "command": "workbench.action.nextEditor",
     },
     {
         "key": "ctrl+shift+tab",
-        "command": "workbench.action.previousEditor"
+        "command": "workbench.action.previousEditor",
     },
     // Disable default MRU behavior
     {
         "key": "ctrl+tab",
-        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+        "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
     },
     {
         "key": "ctrl+shift+tab",
-        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
-    }
-]
+        "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    },
