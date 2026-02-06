@@ -141,6 +141,10 @@ export VISUAL="${EDITOR}"
 # Development tools
 [[ -d "$HOME/.local/kitty.app/bin" ]] && export PATH="$HOME/.local/kitty.app/bin:$PATH"
 [[ -d "/usr/local/node-22/bin" ]] && export PATH="/usr/local/node-22/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 
 # Go
 [[ -d "/usr/local/go/bin" ]] && export PATH="/usr/local/go/bin:$PATH"
@@ -292,7 +296,7 @@ bindkey '^F' fzf-file-widget
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias open='xdg-open .'
+alias open='xdg-open . &>/dev/null & disown'
 
 # -- Directory Stack Navigation --
 # Show numbered directory history with 'd', then use number aliases (1-9) to jump
@@ -344,12 +348,14 @@ alias gstp='git stash pop'     # Stash pop shortcut
 alias gcp='git cherry-pick'    # Cherry pick
 alias grb='git rebase'         # Rebase
 alias gf='git fetch --all --prune'  # Fetch all with prune
+alias gmatch='git fetch --all && git reset --hard @{u} && git clean -fdx' # force Match local to remote
 
 # -- System (Pop!_OS / Ubuntu specific) --
 alias update='sudo apt update && sudo apt upgrade'
 alias cleanup='sudo apt autoremove && sudo apt autoclean'
 alias installed='apt list --installed'
 alias search='apt search'
+alias dolphin='dolphin -stylesheet ~/.config/dolphin-dark.qss'
 
 # -- Useful Shortcuts --
 alias ports='netstat -tulanp'

@@ -127,6 +127,13 @@
     // TERMINAL
     // ============================================================================
     "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "zsh",
+            "args": ["-l"]
+        }
+    },
+        "terminal.integrated.inheritEnv": true,
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.cursorBlinking": true,
