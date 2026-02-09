@@ -129,32 +129,40 @@ source $ZSH/oh-my-zsh.sh
 # -- Editor --
 export EDITOR='code'
 export VISUAL="${EDITOR}"
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 # -- PATH Configuration --
-# Entries are processed in order of precedence (earlier entries override later ones)
-# Conditional checks prevent errors from non-existent directories
+# Build PATH array to automatically deduplicate
+typeset -U path  # This makes path array unique (removes duplicates)
+
+# Add directories in order of precedence (earlier = higher priority)
+# Using path array syntax automatically deduplicates
 
 # User binaries (highest priority)
-[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
-[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/bin" ]] && path=("$HOME/bin" $path)
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
 # Development tools
-[[ -d "$HOME/.local/kitty.app/bin" ]] && export PATH="$HOME/.local/kitty.app/bin:$PATH"
-[[ -d "/usr/local/node-22/bin" ]] && export PATH="/usr/local/node-22/bin:$PATH"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[[ -d "$HOME/.local/kitty.app/bin" ]] && path=("$HOME/.local/kitty.app/bin" $path)
+[[ -d "/usr/local/node-22/bin" ]] && path=("/usr/local/node-22/bin" $path)
 
+# NVM (will add its own paths)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Go
-[[ -d "/usr/local/go/bin" ]] && export PATH="/usr/local/go/bin:$PATH"
-[[ -d "$HOME/go/bin" ]] && export PATH="$HOME/go/bin:$PATH"
+[[ -d "/usr/local/go/bin" ]] && path=("/usr/local/go/bin" $path)
+[[ -d "$HOME/go/bin" ]] && path=("$HOME/go/bin" $path)
 
-# LM Studio CLI
-[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
+# LM Studio CLI (append at end)
+[[ -d "$HOME/.lmstudio/bin" ]] && path+=("$HOME/.lmstudio/bin")
 
 # Load additional environment (if exists)
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# Export the deduplicated PATH
+export PATH
 
 # -- Zoxide Configuration --
 export _ZO_FZF_OPTS="--preview 'eza -la --color=always {2..} | head -100'"
