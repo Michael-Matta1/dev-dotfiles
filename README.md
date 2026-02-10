@@ -41,6 +41,7 @@ The Zsh configuration provides a comprehensive setup with modern plugins, enhanc
 **All configuration files contain placeholders that must be replaced with your own values:**
 
 - `<path_to_your_kitty_background_image>` - Path to your Kitty background image (in `kitty.conf`)
+    + If you added a path to a background image, uncomment the line: `background_opacity 0.1` to make it transparent.
 - `<path_to_your_flake8_config_file>` - Path to your flake8 configuration file (in `vscode/settings.json`)
 - `<path_to_your_shfmt_binary>` - Path to your shfmt binary (in `vscode/settings.json`)
 
