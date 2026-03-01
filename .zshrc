@@ -121,6 +121,9 @@ plugins=(
 # ============================================================================
 # 8. SOURCE OH-MY-ZSH
 # ============================================================================
+DISABLE_AUTO_TITLE="true"
+precmd() { print -Pn "\e]2;꧁𝓜𝓲𝓬𝓱𝓪𝓮𝓵꧂\a\e]1;꧁𝓜𝓲𝓬𝓱𝓪𝓮𝓵꧂\a" } # Set terminal title to "michael" (customize as needed)
+
 source $ZSH/oh-my-zsh.sh
 
 # ============================================================================
@@ -337,6 +340,9 @@ alias fd='fdfind'              # Use fd as alias instead of replacing find
 alias grep='rg'                # ripgrep
 alias top='htop'               # better top
 alias du='dust'                # better du
+
+# -- Clear screen and scrollback
+alias clear='clear && printf "\e[3J"'
 # Note: find is not aliased to fdfind to preserve compatibility with scripts expecting GNU find
 
 # -- Git Shortcuts --
