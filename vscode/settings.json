@@ -267,6 +267,7 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
     },
+    "black-formatter.args": ["--line-length", ""],
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
