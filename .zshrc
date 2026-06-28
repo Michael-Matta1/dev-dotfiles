@@ -117,7 +117,6 @@ plugins=(
   copyfile
   copybuffer
 )
-
 # ============================================================================
 # 8. SOURCE OH-MY-ZSH
 # ============================================================================
@@ -247,25 +246,6 @@ bindkey '^L' clear-screen      # Ctrl+L clears screen (default, but explicit)
 # -- Autosuggestions (system-wide) --
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# -- Syntax Highlighting (system-wide) --
-# Fix slow pasting with zsh-syntax-highlighting
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic
-}
-
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
-
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
-
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # -- Powerlevel10k Theme Configuration --
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -296,6 +276,41 @@ bindkey '^F' fzf-file-widget
 
 # Alternative: if fzf was installed via git
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# -- Syntax Highlighting (system-wide) --
+# Must load AFTER atuin/fzf/any plugin that defines ZLE widgets, since it
+# wraps whatever widgets exist at source time. Loading it earlier means
+# widgets created later (e.g. atuin's history search) never get wrapped,
+# so buffers they insert aren't highlighted until another wrapped widget
+# (an arrow key, a keypress) forces a redraw.
+
+# Fix slow pasting with zsh-syntax-highlighting
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# -- Syntax Highlighting Styles --
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan'
 
 # -- Starship (alternative prompt - uncomment to use instead of p10k) --
 # eval "$(starship init zsh)"
@@ -343,6 +358,7 @@ alias du='dust'                # better du
 
 # -- Clear screen and scrollback
 alias clear='clear && printf "\e[3J"'
+
 # Note: find is not aliased to fdfind to preserve compatibility with scripts expecting GNU find
 
 # -- Git Shortcuts --
@@ -573,6 +589,15 @@ hash -d downloads="$HOME/Downloads" 2>/dev/null
 hash -d docs="$HOME/Documents" 2>/dev/null
 hash -d dotfiles="$HOME/.dotfiles" 2>/dev/null
 hash -d config="$HOME/.config" 2>/dev/null
+
+
+# ============================================================================
+# AUTO-SUGGESTION SETTINGS
+# ============================================================================
+# Improve performance by manually rebinding keys for autosuggestions,
+# Especially when using widgets-heavy plugins like fzf-tab and zsh-syntax-highlighting, zsh-edit-select
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+_zsh_autosuggest_bind_widgets # # Rebind once at the shell startup
 
 # ============================================================================
 # PROFILING OUTPUT
