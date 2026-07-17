@@ -322,7 +322,11 @@ ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias open='xdg-open . &>/dev/null & disown'
+
+open() {
+    xdg-open "${1:-.}" &>/dev/null &
+    disown
+}
 
 # -- Directory Stack Navigation --
 # Show numbered directory history with 'd', then use number aliases (1-9) to jump
